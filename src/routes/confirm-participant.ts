@@ -12,15 +12,21 @@ export async function confirmParticipants(app: FastifyInstance) {
       schema: {
         params: z.object({
           participantId: z.string().uuid(),
+          name: z.string().uuid(),
+          email: z.string().uuid(),
         }),
       },
     },
     async (request, reply) => {
       const { participantId } = request.params
+      const { name } = request.params
+      const { email } = request.params
 
       const participant = await prisma.participant.findUnique({
         where: {
           id: participantId,
+          name: name,
+          email: email
         }
       })
 
@@ -34,7 +40,11 @@ export async function confirmParticipants(app: FastifyInstance) {
 
       await prisma.participant.update({
         where: { id: participantId },
-        data: { is_confirmed: true }
+        data: { 
+          name: name,
+          email: email,
+          is_confirmed: true 
+        }
       })
 
       return reply.redirect(`${env.WEB_BASE_URL}/trips/${participant.trip_id}`)

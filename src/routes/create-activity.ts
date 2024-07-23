@@ -16,12 +16,13 @@ export async function createActivity(app: FastifyInstance) {
         body: z.object({
           title: z.string().min(4),
           occurs_at: z.coerce.date(),
+          is_concluded: z.boolean()
         }),
       },
     },
     async (request) => {
       const { tripId } = request.params
-      const { title, occurs_at } = request.body
+      const { title, occurs_at, is_concluded } = request.body
 
       const trip = await prisma.trip.findUnique({
         where: { id: tripId }
@@ -44,6 +45,7 @@ export async function createActivity(app: FastifyInstance) {
           title,
           occurs_at,
           trip_id: tripId,
+          is_concluded,
         }
       })
 

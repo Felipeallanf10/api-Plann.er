@@ -40,6 +40,7 @@ model Activity {
   id        String   @id @default(uuid())
   title     String
   occurs_at DateTime
+  is_confirmed Boolean @default(false)
 
   trip_id String
   trip    Trip   @relation(fields: [trip_id], references: [id])

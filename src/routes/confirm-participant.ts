@@ -25,8 +25,6 @@ export async function confirmParticipants(app: FastifyInstance) {
       const participant = await prisma.participant.findUnique({
         where: {
           id: participantId,
-          name: name,
-          email: email
         }
       })
 

@@ -15,8 +15,8 @@ export async function confirmParticipants(app: FastifyInstance) {
           
         }),
         body: z.object({
-          name: z.string().uuid(),
-          email: z.string().uuid(),
+          name: z.string(),
+          email: z.string(),
         }),
       },
     },

@@ -6,7 +6,7 @@ import { ClientError } from '../errors/client-error'
 import { env } from '../env'
 
 export async function confirmParticipants(app: FastifyInstance) {
-  app.withTypeProvider<ZodTypeProvider>().get(
+  app.withTypeProvider<ZodTypeProvider>().patch(
     '/participants/:participantId/confirm',
     {
       schema: {
@@ -25,6 +25,8 @@ export async function confirmParticipants(app: FastifyInstance) {
       const participant = await prisma.participant.findUnique({
         where: {
           id: participantId,
+          name: name,
+          email: email
         }
       })
 

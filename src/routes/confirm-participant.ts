@@ -12,6 +12,9 @@ export async function confirmParticipants(app: FastifyInstance) {
       schema: {
         params: z.object({
           participantId: z.string().uuid(),
+          
+        }),
+        body: z.object({
           name: z.string().uuid(),
           email: z.string().uuid(),
         }),
@@ -19,8 +22,11 @@ export async function confirmParticipants(app: FastifyInstance) {
     },
     async (request, reply) => {
       const { participantId } = request.params
-      const { name } = request.params
-      const { email } = request.params
+      const { name } = request.body
+      const { email } = request.body
+
+      console.log(name)
+      console.log(email)
 
       const participant = await prisma.participant.findUnique({
         where: {

@@ -37,7 +37,7 @@ export async function createActivity(app: FastifyInstance) {
       }
 
       if (dayjs(occurs_at).isAfter(trip.ends_at)) {
-        throw new ClientError('Invalid activity date.')
+        throw new ClientError('Invalid activity date.'+ occurs_at + trip.starts_at)
       }
 
       const activity = await prisma.activity.create({

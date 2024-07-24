@@ -33,9 +33,7 @@ export async function createActivity(app: FastifyInstance) {
       }
 
       if (dayjs(occurs_at).isBefore(trip.starts_at)) {
-        console.log(occurs_at)
-        console.log(trip)
-        throw new ClientError('Invalid activity date.')
+        throw new ClientError('Invalid activity date.' + occurs_at + trip.starts_at)
       }
 
       if (dayjs(occurs_at).isAfter(trip.ends_at)) {

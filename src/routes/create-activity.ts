@@ -16,7 +16,6 @@ export async function createActivity(app: FastifyInstance) {
         body: z.object({
           title: z.string().min(4),
           occurs_at: z.coerce.date(),
-          // is_confirmed: z.boolean()
         }),
       },
     },
